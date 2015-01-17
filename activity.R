@@ -19,6 +19,7 @@ dailySteps <- aggregate(cbind(noNA_activity$steps)~noNA_activity$date, FUN=sum)
 TotalSteps <- dailySteps$V1
 #Make a histogram of the total number of steps taken each day
 par(mfrow=c(1,1)) 
+png("histTotalSteps.png", width=480, height=480)
 hist(TotalSteps)
 
 #Calculate and report the mean and median total number of steps taken per day
@@ -35,6 +36,7 @@ medSteps
 intervals <- aggregate(cbind(noNA_activity$steps)~noNA_activity$interval, FUN=mean)
 #Make a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)
 par(mfrow=c(1,1)) 
+png("intervalsplot.png", width=480, height=480)
 plot(intervals, type = "l")
 #Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
 names(intervals)[1] <- "FiveminInt"
@@ -63,6 +65,7 @@ dailySteps1 <- aggregate(cbind(noNA_activity$steps)~noNA_activity$date, FUN=sum)
 TotalSteps1 <- dailySteps$V1
 #Make a histogram of the total number of steps taken each day
 par(mfrow=c(1,1)) 
+png("TotalSteps1.png", width=480, height=480)
 hist(TotalSteps1)
 
 #Calculate and report the mean and median total number of steps taken per day
@@ -108,11 +111,6 @@ weekdf2 <- subset(weekdf, weekday == "Weekday")
 WeekdayInt <- aggregate(cbind(weekdf2$steps)~weekdf2$interval, FUN=mean)
 
 par(mfrow=c(2,1)) 
+png("panel.png", width=480, height=480)
 plot(WeekendInt, type = "l", main = "Weekend", xlab = "5-minute interval", ylab = "avg num of steps")
 plot(WeekdayInt, type = "l", main = "Weekday", xlab = "5-minute interval", ylab = "avg num of steps")
-
-library(knitr)
-library(rmarkdown)
-knit(PA1Template.Rmd)
-render(PA1Template.md)
-knit2html(PA1Template.Rmd)
